@@ -5,7 +5,7 @@ console.log("mmm", menus);
 menus.forEach(menu=>menu.addEventListener("click",(event)=>getNewsByCategory(event)))
 
 const getLatestNews = async () => {
-  const url = new URL(`https://newsapi.org/v2/top-headlines?country=us&apiKey=${API_KEY}`
+  const url = new URL(`https://yjtimes.netlify.app/`
   );
 
   const response = await fetch(url);
@@ -18,7 +18,7 @@ const getLatestNews = async () => {
 const getNewsByCategory = async(event)=>{
   const category = event.target.textContent.toLowerCase();
   console.log("category");
-  const url = new URL(`https://newsapi.org/v2/top-headlines?country=us&category=${category}&apiKey=${API_KEY}`)
+  const url = new URL(`https://yjtimes.netlify.app/`)
   const response = await fetch(url)
   const data = await response.json()
   console.log("ddd", data)
@@ -31,7 +31,7 @@ const getNewsByKeyword=async()=>{
   const keyword = document.getElementById("search-input").value;
   
   console.log("keyword");
-  const url = new URL(`https://newsapi.org/v2/top-headlines?country=us&q=${keyword}&apiKey=${API_KEY}`)
+  const url = new URL(`https://yjtimes.netlify.app/`)
 
   const response = await fetch (url)
   const data = await response.json()
