@@ -7,17 +7,37 @@
   <title>nytimes</title>
   
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-
+  <script src="https://kit.fontawesome.com/2b71f82e84.js" crossorigin="anonymous"></script>
   <link href="style.css" rel="stylesheet" type="text/css" />
 
 </head>
 
 <body>
+  <div class="side-menu" id="mySidenav">
+    <button class="closebtn" onclick="closeNav()">&times;</button>
+    <div class="side-menu-list" id="menu-list">
+      <button>Business</button>
+      <button>Entertainment</button>
+      <button>General</button>
+      <button>Health</button>
+      <button>Science</button>
+      <button>Sports</button>
+      <button>Technology</button>
+    </div>
+
+</div>
+
+
 
   <section class="container">
-    <div>
-      <input id ="search-input"/>
-      <button onclick="getNewsByKeyword()">Search</button>
+    <div class="menu-and-search">
+      <i class="fas fa-bars fa-xl hide icon-button" onclick="openNav()"></i>
+      <i class="fas fa-search fa-xl icon-button" onclick="openSearchBox()"></i>
+
+      <span id="input-area">
+          <input type="text" id="search-input" placeholder="당신의 키워드는?" />
+          <button class="search-button" onclick="getNewsByKeyword()">검색!</button>
+      </span>
 
     </div>
 
@@ -25,6 +45,7 @@
       <div class="head-line">
         <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQUqGzRoHCJMhpII67uqYMNerOgpdu1aPTeDgTX6Bk4Lg&s">
       </div>
+
       <div class="menus">
         <button>Business</button>
         <button>Entertainment</button>
@@ -63,7 +84,7 @@
     
   </section>
   
-
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.0/moment.min.js"></script>
   <script src="main.js"></script>
 </body>
 
