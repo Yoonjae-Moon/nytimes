@@ -3,24 +3,107 @@ html {
     width: 100%;
   }
   
+/* 햄버거 메뉴 */
+.side-menu {
+  height: 100%;
+  width: 0;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: burlywood;
+  overflow-x: hidden;
+  transition: 0.5s;
+  padding-top: 60px;
+}
+.side-menu-list button {
+  margin: 5px;
+  border: none;
+  background: none;
+  width: 120px;
+}
+
+.side-menu .closebtn {
+  position: absolute;
+  top: 0;
+  right: 25px;
+  font-size: 36px;
+  margin-left: 50px;
+  border: none;
+  background: none;
+}
+
+.side-menu-list {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.side-menu-list button:hover {
+  background-color: beige;
+  border-radius: 3px;
+}
+
+.icon-button{
+  padding: 0 10px;
+  margin-right: 10px;
+  cursor:pointer;
+}
+
+/* 화면이 작아졌을때 가리기 */
+.menus{
+  display:none;
+
+}
+
+@media screen and (min-width: 768px) {
+  .menus {
+    display: flex; 
+    margin-top: 1em;
+    justify-content: center;
+    flex-wrap: wrap;
+    border-top: 1px solid #ebebeb;
+    border-bottom: 4px double black;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .fa-bars {
+    display: none;
+  }
+}
+
+/* 검색창 숨기기 */
+#input-area {
+  display: none;
+}
+
+  .menu-and-search{
+    display: flex;
+    align-items:center;
+    padding-top:30px;
+
+  }
+
   .head-line {
     margin-top: 1em;
     display: flex;
     justify-content: center;
   }
   
-  .head-line image {
-    width: 430px;
+  .head-line img {
+    width: 500px;
+
   }
   
-  .menus {
+  /* .menus {
     margin-top: 1em;
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
     border-top: 1px solid #ebebeb;
     border-bottom: 4px double black;
-  }
+  } */
   
   .menus button {
     border: none;
