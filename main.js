@@ -4,7 +4,7 @@ const menus = document.querySelectorAll(".menus button")
 console.log("mmm", menus);
 menus.forEach(menu=>menu.addEventListener("click",(event)=>getNewsByCategory(event)))
 
-let url = new URL(`https://newsapi.org/v2/top-headlines?country=us&apiKey=${API_KEY}`);
+let url = new URL(`https://yjtimes.netlify.app/top-headlines?country=us&apiKey=${API_KEY}`);
 
 //에러
 const getNews = async()=>{
@@ -28,7 +28,7 @@ const getNews = async()=>{
 
 //뉴스 가져오기
 const getLatestNews = async () => {
-  url = new URL(`https://newsapi.org/v2/top-headlines?country=us&apiKey=${API_KEY}`);
+  url = new URL(`https://yjtimes.netlify.app/top-headlines?country=us&apiKey=${API_KEY}`);
 
   getNews();
 
@@ -37,7 +37,7 @@ const getLatestNews = async () => {
 //카테고리 분류
 const getNewsByCategory = async(event)=>{
   const category = event.target.textContent.toLowerCase();
-  url = new URL(`https://newsapi.org/v2/top-headlines?country=us&category=${category}&apiKey=${API_KEY}`)
+  url = new URL(`https://yjtimes.netlify.app/top-headlines?country=us&category=${category}&apiKey=${API_KEY}`)
   getNews();
 }
 
@@ -45,7 +45,7 @@ const getNewsByCategory = async(event)=>{
 const getNewsByKeyword=async()=>{
   const keyword = document.getElementById("search-input").value;
   
-  url = new URL(`https://newsapi.org/v2/top-headlines?country=us&q=${keyword}&apiKey=${API_KEY}`)
+  url = new URL(`https://yjtimes.netlify.app/top-headlines?country=us&q=${keyword}&apiKey=${API_KEY}`)
 
   getNews();
 }
