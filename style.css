@@ -126,3 +126,10 @@ html {
     border-bottom: 2px solid black;
   }
 
+  .pagination {
+    display: flex;
+    justify-content: center;
+    list-style: none;
+    padding: 0;
+    cursor : pointer;
+  }
