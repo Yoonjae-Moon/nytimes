@@ -4,11 +4,21 @@ const menus = document.querySelectorAll(".menus button")
 console.log("mmm", menus);
 menus.forEach(menu=>menu.addEventListener("click",(event)=>getNewsByCategory(event)))
 
-let url = new URL(`https://yjtimes.netlify.app/top-headlines?country=us&apiKey=${API_KEY}`);
+let totalResult = 0;
+let page = 1
+const pageSize = 10;
+const groupSize = 5;
+
+
+let url = new URL(`https://newsapi.org/v2/top-headlines?country=us&apiKey=${API_KEY}`);
 
 //에러
 const getNews = async()=>{
   try{
+
+    url.searchParams.set("page", page); // =>? &page=page
+    url.searchParams.set("pageSize", pageSize);
+
     const response = await fetch(url);
 
     const data = await response.json()
@@ -17,7 +27,11 @@ const getNews = async()=>{
         throw new Error("No result for this search")
       }
       newsList = data.articles;
+      totalResult = data.totalResults
+
       render();
+      paginationRender()
+
     } else{
       throw new Error(data.message)
     }    
@@ -28,7 +42,7 @@ const getNews = async()=>{
 
 //뉴스 가져오기
 const getLatestNews = async () => {
-  url = new URL(`https://yjtimes.netlify.app/top-headlines?country=us&apiKey=${API_KEY}`);
+  url = new URL(`https://newsapi.org/v2/top-headlines?country=us&apiKey=${API_KEY}`);
 
   getNews();
 
@@ -37,7 +51,7 @@ const getLatestNews = async () => {
 //카테고리 분류
 const getNewsByCategory = async(event)=>{
   const category = event.target.textContent.toLowerCase();
-  url = new URL(`https://yjtimes.netlify.app/top-headlines?country=us&category=${category}&apiKey=${API_KEY}`)
+  url = new URL(`https://newsapi.org/v2/top-headlines?country=us&category=${category}&apiKey=${API_KEY}`)
   getNews();
 }
 
@@ -45,7 +59,7 @@ const getNewsByCategory = async(event)=>{
 const getNewsByKeyword=async()=>{
   const keyword = document.getElementById("search-input").value;
   
-  url = new URL(`https://yjtimes.netlify.app/top-headlines?country=us&q=${keyword}&apiKey=${API_KEY}`)
+  url = new URL(`https://newsapi.org/v2/top-headlines?country=us&q=${keyword}&apiKey=${API_KEY}`)
 
   getNews();
 }
@@ -98,10 +112,67 @@ const openSearchBox = () => {
   }
 };
 
+const paginationRender=()=>{
+  //totalResult
+  //page
+  //pageSize
+  //groupSize
+  //totalPages
+  const totalPages = Math.ceil(totalResult / pageSize)
+  //pageGroup
+  const pageGroup = Math.ceil(page/groupSize)
+  //lastPage
+  let lastPage = pageGroup * groupSize;
+  // 마지막 페이지 그룹이 그룹 사이즈보다 작다? lastpage = totalpage
+  if (lastPage > totalPages){
+    lastPage = totalPages
+  }
+
+
+
+  //firstPage
+  const firstPage = lastPage - (groupSize-1) <= 0 ? 1 : lastPage - (groupSize - 1);
+
+  //first~last
+  let paginationHTML = '';
+
+  if (page > 1) { // Show these only if we are not on the first page
+    paginationHTML += `<li class="page-item" onclick="moveToPage(1)"><a class="page-link">&lt;&lt;</a></li>
+                        <li class="page-item" onclick="moveToPage(${page - 1})"><a class="page-link">&lt;</a></li>`;
+  }
+
+  for (let i = firstPage; i <= lastPage; i++) {
+    paginationHTML += `<li class="page-item ${i === page ? "active" : ""}" onclick="moveToPage(${i})"><a class="page-link">${i}</a></li>`;
+  }
+
+  if (page < totalPages) { // Show these only if we are not on the last page
+    paginationHTML += `<li class="page-item" onclick="moveToPage(${page + 1})"><a class="page-link">&gt;</a></li>
+                        <li class="page-item" onclick="moveToPage(${totalPages})"><a class="page-link">&gt;&gt;</a></li>`;
+  }
+
+
+  document.querySelector(".pagination").innerHTML=paginationHTML
+
+
+  // <nav aria-label="Page navigation example">
+  //   <ul class="pagination">
+  //     <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+  //     <li class="page-item"><a class="page-link" href="#">1</a></li>
+  //     <li class="page-item"><a class="page-link" href="#">2</a></li>
+  //     <li class="page-item"><a class="page-link" href="#">3</a></li>
+  //     <li class="page-item"><a class="page-link" href="#">Next</a></li>
+  //   </ul>
+  // </nav>
+  
+}
+
+const moveToPage = (pageNum) => {
+  console.log("moveToPage", pageNum);
+  page = pageNum;
+  getNews()
+}
+
 getLatestNews();
 
-//햄버거 메뉴
-//검색 기능 생겼다 사라지기
-//검색결과 없을 시-done
-//이미지가 없을 시
+
 
