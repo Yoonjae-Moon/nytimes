@@ -10,7 +10,7 @@ const pageSize = 10;
 const groupSize = 5;
 
 
-let url = new URL(`https://newsapi.org/v2/top-headlines?country=us&apiKey=${API_KEY}`);
+let url = new URL(`https://yjtimes.netlify.app/top-headlines?country=us&apiKey=${API_KEY}`);
 
 //에러
 const getNews = async()=>{
