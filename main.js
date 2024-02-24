@@ -136,7 +136,7 @@ const paginationRender=()=>{
   //first~last
   let paginationHTML = '';
 
-  if (page > 1) { // Show these only if we are not on the first page
+  if (page > 1) { 
     paginationHTML += `<li class="page-item" onclick="moveToPage(1)"><a class="page-link">&lt;&lt;</a></li>
                         <li class="page-item" onclick="moveToPage(${page - 1})"><a class="page-link">&lt;</a></li>`;
   }
@@ -145,7 +145,7 @@ const paginationRender=()=>{
     paginationHTML += `<li class="page-item ${i === page ? "active" : ""}" onclick="moveToPage(${i})"><a class="page-link">${i}</a></li>`;
   }
 
-  if (page < totalPages) { // Show these only if we are not on the last page
+  if (page < totalPages) { 
     paginationHTML += `<li class="page-item" onclick="moveToPage(${page + 1})"><a class="page-link">&gt;</a></li>
                         <li class="page-item" onclick="moveToPage(${totalPages})"><a class="page-link">&gt;&gt;</a></li>`;
   }
